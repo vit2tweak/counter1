@@ -1,46 +1,34 @@
-# counter1
+# Counter1
 
-AI-generated counter application with React implementation
-
-## What's New in v1.2.0
-- Added counter functionality with increase/decrease buttons
-- Implemented customizable step amount via number input
-- Enhanced UI with modern styling
-- Added input validation
+## What's New in v2.0.0
+- Added tabbed interface for multiple features
+- Implemented Todo List with CRUD operations
+- Enhanced UI with Material-UI components
+- Added task completion tracking
+- Persistent storage for todos
 
 ## Features
-- Increment and decrement counter value
-- Customize step amount
-- Real-time counter display
-- Responsive design
+### Counter Tab
+- Increment/decrement counter
+- Customizable step amount
 - Input validation
 
+### Todo List Tab
+- Add new todos
+- Edit existing todos
+- Mark todos as complete
+- Delete todos
+- Persistent storage
+
 ## Getting Started
-
 1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm start
-   ```
-4. Open http://localhost:3000 in your browser
+2. Install dependencies: `npm install`
+3. Start the development server: `npm start`
 
-## Usage
-- Use the '+' button to increment the counter
-- Use the '-' button to decrement the counter
-- Enter a number in the 'Step' input to change the increment/decrement amount
-
-## Technical Details
-- Built with React 18.2.0
-- Uses modern JavaScript features
-- Implements React Hooks (useState)
-- Responsive CSS design
+## Technology Stack
+- React 18.2.0
+- Material-UI 5.x
+- Local Storage for data persistence
 
 ## Contributing
-Feel free to submit issues and enhancement requests
-
-## License
-MIT License
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

@@ -1,58 +1,39 @@
 import React, { useState } from 'react';
+import { Box, Tabs, Tab } from '@mui/material';
+import Counter from './components/Counter';
+import TodoList from './components/TodoList';
 import './App.css';
 
+function TabPanel({ children, value, index }) {
+  return (
+    <div hidden={value !== index} style={{ width: '100%' }}>
+      {value === index && children}
+    </div>
+  );
+}
+
 function App() {
-  const [count, setCount] = useState(0);
-  const [step, setStep] = useState(1);
+  const [tabValue, setTabValue] = useState(0);
 
-  // Handle step input change with validation
-  const handleStepChange = (e) => {
-    const value = parseInt(e.target.value) || 1;
-    setStep(Math.max(1, value));
-  };
-
-  // Handle counter increment
-  const handleIncrement = () => {
-    setCount(prevCount => prevCount + step);
-  };
-
-  // Handle counter decrement
-  const handleDecrement = () => {
-    setCount(prevCount => prevCount - step);
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
   };
 
   return (
-    <div className="App">
-      <div className="counter-container">
-        <h1>Counter</h1>
-        
-        <div className="counter-display">
-          <span>{count}</span>
-        </div>
-
-        <div className="counter-controls">
-          <button onClick={handleDecrement} className="counter-button">
-            -
-          </button>
-          
-          <div className="step-input-container">
-            <label htmlFor="step">Step:</label>
-            <input
-              id="step"
-              type="number"
-              min="1"
-              value={step}
-              onChange={handleStepChange}
-              className="step-input"
-            />
-          </div>
-
-          <button onClick={handleIncrement} className="counter-button">
-            +
-          </button>
-        </div>
-      </div>
-    </div>
+    <Box className="App">
+      <Box sx={{ width: '100%', maxWidth: 600, bgcolor: 'white', borderRadius: 2, boxShadow: 2 }}>
+        <Tabs value={tabValue} onChange={handleTabChange} centered>
+          <Tab label="Counter" />
+          <Tab label="Todo List" />
+        </Tabs>
+        <TabPanel value={tabValue} index={0}>
+          <Counter />
+        </TabPanel>
+        <TabPanel value={tabValue} index={1}>
+          <TodoList />
+        </TabPanel>
+      </Box>
+    </Box>
   );
 }
 
