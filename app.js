@@ -1,42 +1,32 @@
 import React, { useState, useEffect } from 'react';
-  import './App.css';
-  
-  function App() {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-  
-    useEffect(() => {
-      // Simulate API call
-      setTimeout(() => {
-        setData([
-          { id: 1, title: 'Welcome to counter1' },
-          { id: 2, title: 'Built with React and modern web technologies' }
-        ]);
-        setLoading(false);
-      }, 1000);
-    }, []);
-  
-    return (
-      <div className="app">
-        <header className="app-header">
-          <h1>counter1</h1>
-          <p>Create a counter app with increment and decrement buttons</p>
-        </header>
-        <main className="app-main">
-          {loading ? (
-            <div className="loading">Loading...</div>
-          ) : (
-            <div className="content">
-              {data.map(item => (
-                <div key={item.id} className="card">
-                  <h3>{item.title}</h3>
-                </div>
-              ))}
-            </div>
-          )}
-        </main>
-      </div>
-    );
+import './App.css';
+
+function App() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate API call
+    setTimeout(() => {
+      setData(['Item 1', 'Item 2', 'Item 3']);
+      setLoading(false);
+    }, 1000);
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
-  
-  export default App;
+
+  return (
+    <div>
+      <h1>Data List</h1>
+      <ul>
+        {data.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default App;
