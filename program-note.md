@@ -1,9 +1,13 @@
 # Counter1 Project Documentation
 
 ## Project Overview
-Counter1 is a React-based application that combines a counter functionality with a todo list manager. The application features a tabbed interface allowing users to switch between two main features.
+Counter1 is a React-based application combining counter functionality, todo list management, and user authentication. The application features a secure login system and a tabbed interface for accessing core features.
 
 ## Current Features
+- User Authentication:
+  - Login system with hardcoded credentials
+  - Protected routes for authenticated users
+  - Session management
 - Tabbed interface with two main sections
 - Counter Tab:
   - Increment/decrement counter
@@ -19,6 +23,7 @@ Counter1 is a React-based application that combines a counter functionality with
 - React Router DOM 6.x
 - Material-UI 5.x
 - LocalStorage for data persistence
+- JWT for authentication
 
 ## Project Structure
 ```
@@ -26,30 +31,52 @@ Counter1 is a React-based application that combines a counter functionality with
 │   ├── components/
 │   │   ├── Counter.js
 │   │   ├── TodoList.js
+│   │   ├── Login.js
+│   │   ├── ProtectedRoute.js
 │   │   └── TabPanel.js
+│   ├── contexts/
+│   │   └── AuthContext.js
+│   ├── services/
+│   │   └── auth.js
 │   ├── App.js
 │   ├── App.css
 │   └── index.js
 ```
 
+## Authentication
+- Username: ai-gen-user
+- Password: Pen555Bottle++
+- JWT token stored in localStorage
+- Protected routes using React Router
+
+## Setup Instructions
+1. Clone repository
+2. Run `npm install`
+3. Run `npm start`
+4. Login with provided credentials
+
+## Known Limitations
+- Hardcoded authentication credentials
+- Todo data stored locally
+- No password recovery system
+
 ## Recent Changes
+v3.0.0
+- Added user authentication system
+- Implemented protected routes
+- Added login page
+- Enhanced security with JWT
+
 v2.0.0
 - Added tabbed interface
 - Implemented Todo list functionality
 - Integrated Material-UI components
 - Added local storage persistence
 
-## Setup Instructions
-1. Clone repository
-2. Run `npm install`
-3. Run `npm start`
-
-## Known Limitations
-- Todo data is stored locally
-- No user authentication
-
 ## Future Enhancements
 - Cloud synchronization
-- User accounts
+- User registration
+- Password recovery
 - Dark mode support
 - Task categories
+- Multiple user support
