@@ -1,40 +1,55 @@
-import React, { useState } from 'react';
-import { Box, Tabs, Tab } from '@mui/material';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Box, AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import Login from './components/Login';
 import Counter from './components/Counter';
 import TodoList from './components/TodoList';
+import TabPanel from './components/TabPanel';
 import './App.css';
 
-function TabPanel({ children, value, index }) {
-  return (
-    <div hidden={value !== index} style={{ width: '100%' }}>
-      {value === index && children}
-    </div>
-  );
-}
-
-function App() {
-  const [tabValue, setTabValue] = useState(0);
-
-  const handleTabChange = (event, newValue) => {
-    setTabValue(newValue);
-  };
+const Navigation = () => {
+  const { user, logout } = useAuth();
 
   return (
-    <Box className="App">
-      <Box sx={{ width: '100%', maxWidth: 600, bgcolor: 'white', borderRadius: 2, boxShadow: 2 }}>
-        <Tabs value={tabValue} onChange={handleTabChange} centered>
-          <Tab label="Counter" />
-          <Tab label="Todo List" />
-        </Tabs>
-        <TabPanel value={tabValue} index={0}>
-          <Counter />
-        </TabPanel>
-        <TabPanel value={tabValue} index={1}>
-          <TodoList />
-        </TabPanel>
-      </Box>
-    </Box>
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Counter1
+        </Typography>
+        {user && (
+          <Button color="inherit" onClick={logout}>
+            Logout
+          </Button>
+        )}
+      </Toolbar>
+    </AppBar>
   );
-}
+};
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <Box sx={{ flexGrow: 1 }}>
+          <Navigation />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <TabPanel />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Box>
+      </Router>
+    </AuthProvider>
+  );
+};
 
 export default App;
