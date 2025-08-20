@@ -1,42 +1,46 @@
 # counter1
 
-AI-generated prototype with React implementation
+AI-generated counter application with React implementation
 
-## What's New in v1.1.0
-- Added missing public/index.html file
-- Added proper project structure with src directory
-- Included essential CSS styling
-- Added proper React application bootstrapping
+## What's New in v1.2.0
+- Added counter functionality with increase/decrease buttons
+- Implemented customizable step amount via number input
+- Enhanced UI with modern styling
+- Added input validation
 
-## Setup
+## Features
+- Increment and decrement counter value
+- Customize step amount
+- Real-time counter display
+- Responsive design
+- Input validation
 
-1. Install dependencies:
-```bash
-npm install
-```
+## Getting Started
 
-2. Start the development server:
-```bash
-npm start
-```
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+4. Open http://localhost:3000 in your browser
 
-3. Build for production:
-```bash
-npm run build
-```
+## Usage
+- Use the '+' button to increment the counter
+- Use the '-' button to decrement the counter
+- Enter a number in the 'Step' input to change the increment/decrement amount
 
-## Project Structure
-- `/public` - Static files and HTML template
-- `/src` - React application source code
-  - `App.js` - Main application component
-  - `index.js` - Application entry point
-  - `*.css` - Styling files
+## Technical Details
+- Built with React 18.2.0
+- Uses modern JavaScript features
+- Implements React Hooks (useState)
+- Responsive CSS design
 
-## Dependencies
-- React 18.2.0
-- React DOM 18.2.0
-- React Scripts 5.0.1
+## Contributing
+Feel free to submit issues and enhancement requests
 
-## Notes
-- This version fixes the missing index.html issue and provides a complete React application structure
-- The application maintains its original functionality while adding proper setup
+## License
+MIT License
