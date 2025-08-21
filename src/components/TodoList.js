@@ -1,100 +1,77 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  IconButton,
-  TextField,
-  Button,
-  Checkbox
-} from '@mui/material';
-import { Delete, Edit } from '@mui/icons-material';
+import { Box, List, ListItem, ListItemText, TextField, Button, Checkbox, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function TodoList() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const saved = localStorage.getItem('todos');
+    return saved ? JSON.parse(saved) : [];
+  });
   const [newTodo, setNewTodo] = useState('');
-  const [editId, setEditId] = useState(null);
-
-  useEffect(() => {
-    const savedTodos = localStorage.getItem('todos');
-    if (savedTodos) setTodos(JSON.parse(savedTodos));
-  }, []);
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const handleAdd = () => {
+  const addTodo = (e) => {
+    e.preventDefault();
     if (!newTodo.trim()) return;
-    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+    
+    setTodos([...todos, { text: newTodo, completed: false }]);
     setNewTodo('');
   };
 
-  const handleDelete = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+  const toggleTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].completed = !newTodos[index].completed;
+    setTodos(newTodos);
   };
 
-  const handleToggle = (id) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
-  };
-
-  const handleEdit = (id, newText) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, text: newText } : todo
-    ));
-    setEditId(null);
+  const deleteTodo = (index) => {
+    setTodos(todos.filter((_, i) => i !== index));
   };
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', mb: 2 }}>
+    <Box>
+      <form onSubmit={addTodo} style={{ marginBottom: '20px' }}>
         <TextField
           fullWidth
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder="Add new todo"
+          variant="outlined"
           size="small"
         />
         <Button
+          type="submit"
           variant="contained"
-          onClick={handleAdd}
-          sx={{ ml: 1 }}
+          sx={{ mt: 1 }}
+          fullWidth
         >
-          Add
+          Add Todo
         </Button>
-      </Box>
+      </form>
+
       <List>
-        {todos.map(todo => (
-          <ListItem key={todo.id}>
+        {todos.map((todo, index) => (
+          <ListItem
+            key={index}
+            secondaryAction={
+              <IconButton edge="end" onClick={() => deleteTodo(index)}>
+                <DeleteIcon />
+              </IconButton>
+            }
+          >
             <Checkbox
               checked={todo.completed}
-              onChange={() => handleToggle(todo.id)}
+              onChange={() => toggleTodo(index)}
             />
-            {editId === todo.id ? (
-              <TextField
-                fullWidth
-                defaultValue={todo.text}
-                onBlur={(e) => handleEdit(todo.id, e.target.value)}
-                autoFocus
-              />
-            ) : (
-              <ListItemText
-                primary={todo.text}
-                sx={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-              />
-            )}
-            <ListItemSecondaryAction>
-              <IconButton onClick={() => setEditId(todo.id)}>
-                <Edit />
-              </IconButton>
-              <IconButton onClick={() => handleDelete(todo.id)}>
-                <Delete />
-              </IconButton>
-            </ListItemSecondaryAction>
+            <ListItemText
+              primary={todo.text}
+              sx={{
+                textDecoration: todo.completed ? 'line-through' : 'none'
+              }}
+            />
           </ListItem>
         ))}
       </List>

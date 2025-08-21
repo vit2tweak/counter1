@@ -1,9 +1,10 @@
 # Counter1 Project Documentation
 
 ## Project Overview
-Counter1 is a React-based application that combines counter functionality with a todo list manager, featuring a tabbed interface and local storage persistence.
+Counter1 is a React-based application that combines counter functionality with a todo list manager, featuring a tabbed interface and local storage persistence. The application is designed for direct access without login requirements.
 
 ## Current Features
+- Direct access without authentication
 - Tabbed interface with two main sections
 - Counter Tab:
   - Increment/decrement counter
@@ -35,30 +36,36 @@ Counter1 is a React-based application that combines counter functionality with a
 └── README.md
 ```
 
-## Recent Changes
-v2.0.2
-- Added missing TabPanel component
-- Fixed module resolution error
-- Updated documentation
-
-v2.0.1
-- Added .gitignore file
-- Updated documentation
-- Improved code organization
-
-## Known Limitations
-- Todo data is stored locally
-- No user authentication
-- No cloud synchronization
+## Configuration Details
+- No environment variables required
+- Local development server runs on port 3000
+- No authentication configuration needed
 
 ## Setup Instructions
 1. Clone repository
 2. Run `npm install`
 3. Run `npm start`
 
+## Known Limitations
+- Todo data is stored locally
+- No cloud synchronization
+- Limited to single user per browser
+
+## Recent Changes
+v2.1.0
+- Removed authentication requirement
+- Direct access to application features
+- Updated documentation
+- Code optimization
+
+v2.0.1
+- Added .gitignore file
+- Updated documentation
+- Improved code organization
+
 ## Future Enhancements
 - Cloud synchronization
-- User accounts
+- Optional user accounts
 - Dark mode support
 - Task categories
 - Mobile responsiveness improvements

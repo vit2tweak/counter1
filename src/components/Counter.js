@@ -5,38 +5,40 @@ function Counter() {
   const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
 
-  const handleStepChange = (e) => {
-    const value = parseInt(e.target.value) || 1;
-    setStep(Math.max(1, value));
+  const handleStepChange = (event) => {
+    const value = parseInt(event.target.value) || 1;
+    setStep(value);
   };
 
   return (
-    <Box sx={{ textAlign: 'center', p: 3 }}>
-      <Typography variant="h2">{count}</Typography>
-      <Box sx={{ my: 2 }}>
+    <Box sx={{ textAlign: 'center' }}>
+      <Typography variant="h4" gutterBottom>
+        Count: {count}
+      </Typography>
+      
+      <Box sx={{ marginBottom: 2 }}>
         <TextField
           type="number"
           label="Step"
           value={step}
           onChange={handleStepChange}
           size="small"
-          sx={{ mx: 1 }}
         />
       </Box>
+      
       <Box>
         <Button
           variant="contained"
           onClick={() => setCount(count + step)}
-          sx={{ mx: 1 }}
+          sx={{ mr: 1 }}
         >
-          Increase
+          Increment
         </Button>
         <Button
           variant="contained"
           onClick={() => setCount(count - step)}
-          sx={{ mx: 1 }}
         >
-          Decrease
+          Decrement
         </Button>
       </Box>
     </Box>
