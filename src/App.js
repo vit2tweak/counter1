@@ -1,55 +1,33 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Box, AppBar, Toolbar, Typography, Button } from '@mui/material';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
-import Login from './components/Login';
+import React, { useState } from 'react';
+import { Tabs, Tab, Box } from '@mui/material';
 import Counter from './components/Counter';
 import TodoList from './components/TodoList';
 import TabPanel from './components/TabPanel';
 import './App.css';
 
-const Navigation = () => {
-  const { user, logout } = useAuth();
+function App() {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Counter1
-        </Typography>
-        {user && (
-          <Button color="inherit" onClick={logout}>
-            Logout
-          </Button>
-        )}
-      </Toolbar>
-    </AppBar>
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange}>
+          <Tab label="Counter" />
+          <Tab label="Todo List" />
+        </Tabs>
+      </Box>
+      <TabPanel value={value} index={0}>
+        <Counter />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <TodoList />
+      </TabPanel>
+    </Box>
   );
-};
-
-const App = () => {
-  return (
-    <AuthProvider>
-      <Router>
-        <Box sx={{ flexGrow: 1 }}>
-          <Navigation />
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <TabPanel />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </Box>
-      </Router>
-    </AuthProvider>
-  );
-};
+}
 
 export default App;
