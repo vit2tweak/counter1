@@ -1,39 +1,43 @@
 import React from 'react';
-import { Box, Tabs, Tab } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import Login from './components/Login';
 import Counter from './components/Counter';
 import TodoList from './components/TodoList';
+import { Container, Tabs, Tab, Box } from '@mui/material';
 import './App.css';
 
-function TabPanel({ children, value, index }) {
-  return (
-    <div hidden={value !== index} style={{ padding: '20px' }}>
-      {value === index && children}
-    </div>
-  );
-}
-
 function App() {
-  const [tabValue, setTabValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setTabValue(newValue);
-  };
+  const [value, setValue] = React.useState(0);
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 800, margin: '0 auto', padding: '20px' }}>
-      <Tabs value={tabValue} onChange={handleChange} centered>
-        <Tab label="Counter" />
-        <Tab label="Todo List" />
-      </Tabs>
-      
-      <TabPanel value={tabValue} index={0}>
-        <Counter />
-      </TabPanel>
-      
-      <TabPanel value={tabValue} index={1}>
-        <TodoList />
-      </TabPanel>
-    </Box>
+    <AuthProvider>
+      <Router>
+        <Container>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Box sx={{ width: '100%' }}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                      <Tabs value={value} onChange={(e, newValue) => setValue(newValue)}>
+                        <Tab label="Counter" />
+                        <Tab label="Todo List" />
+                      </Tabs>
+                    </Box>
+                    {value === 0 && <Counter />}
+                    {value === 1 && <TodoList />}
+                  </Box>
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </Container>
+      </Router>
+    </AuthProvider>
   );
 }
 

@@ -1,44 +1,32 @@
 # Counter1
 
-## What's New in v2.1.0
-- Direct access to application features without login requirement
-- Streamlined user experience
-- Updated dependencies to latest versions
-- Performance optimizations
+## What's New in v3.0.0
+- Added authentication system
+- Protected routes implementation
+- Login functionality
+- Session management
 
-## Overview
-Counter1 is a React application that combines a counter and todo list manager with a clean, tabbed interface. The application now provides immediate access to all features without requiring authentication.
-
-## Features
-- Counter with customizable step value
-- Todo list with persistent storage
-- Clean Material-UI interface
-- No login required
-
-## Getting Started
+## Setup
 1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
+2. Create .env file with required variables:
    ```
-3. Start the development server:
-   ```bash
-   npm start
+   REACT_APP_API_URL=http://localhost:3001
+   REACT_APP_JWT_SECRET=your-secret-key
    ```
-4. Open http://localhost:3000 in your browser
+3. Install dependencies: `npm install`
+4. Start the development server: `npm start`
 
-## Usage
-- Switch between Counter and Todo List using the tabs
-- Counter: Use the step input to customize increment/decrement amount
-- Todo List: Add, complete, and delete tasks with automatic saving
+## Authentication
+The application now requires users to log in before accessing the counter and todo features. Authentication is handled using JWT tokens and protected routes.
 
-## Technical Details
-- Built with React 18.2.0
-- Styled with Material-UI 5.x
-- Local storage for data persistence
+## Migration Notes
+- Existing users will need to create accounts
+- Local storage data structure has been updated
+- API backend is required for authentication
 
-## Contributing
-Contributions are welcome! Please read our contributing guidelines for details.
+## Known Issues
+- Requires backend service for authentication
+- Session expires after 24 hours
 
 ## License
 MIT

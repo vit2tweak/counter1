@@ -1,10 +1,14 @@
 # Counter1 Project Documentation
 
 ## Project Overview
-Counter1 is a React-based application that combines counter functionality with a todo list manager, featuring a tabbed interface and local storage persistence. The application is designed for direct access without login requirements.
+Counter1 is a React-based application that combines counter functionality with a todo list manager, now featuring secure authentication and protected routes.
 
 ## Current Features
-- Direct access without authentication
+- User Authentication:
+  - Login/Register functionality
+  - Protected routes
+  - JWT token-based authentication
+  - Session management
 - Tabbed interface with two main sections
 - Counter Tab:
   - Increment/decrement counter
@@ -19,7 +23,9 @@ Counter1 is a React-based application that combines counter functionality with a
 - React 18.2.0
 - React Router DOM 6.x
 - Material-UI 5.x
+- JWT for authentication
 - LocalStorage for data persistence
+- Axios for API calls
 
 ## Project Structure
 ```
@@ -27,45 +33,53 @@ Counter1 is a React-based application that combines counter functionality with a
 │   ├── components/
 │   │   ├── Counter.js
 │   │   ├── TodoList.js
-│   │   └── TabPanel.js
+│   │   ├── Login.js
+│   │   ├── Register.js
+│   │   └── ProtectedRoute.js
+│   ├── contexts/
+│   │   └── AuthContext.js
+│   ├── services/
+│   │   └── auth.service.js
 │   ├── App.js
 │   ├── App.css
 │   └── index.js
-├── .gitignore
-├── package.json
-└── README.md
 ```
 
+## API Endpoints
+- POST /api/auth/login
+- POST /api/auth/register
+- POST /api/auth/logout
+- GET /api/auth/verify
+
 ## Configuration Details
-- No environment variables required
+- JWT_SECRET in .env file
+- API_URL in .env file
 - Local development server runs on port 3000
-- No authentication configuration needed
 
 ## Setup Instructions
 1. Clone repository
-2. Run `npm install`
-3. Run `npm start`
+2. Create .env file with required variables
+3. Run `npm install`
+4. Run `npm start`
 
 ## Known Limitations
-- Todo data is stored locally
-- No cloud synchronization
-- Limited to single user per browser
+- Todo data still stored locally
+- No password recovery
+- Session expires after 24 hours
 
 ## Recent Changes
-v2.1.0
-- Removed authentication requirement
-- Direct access to application features
-- Updated documentation
-- Code optimization
+v3.0.0
+- Added authentication system
+- Implemented protected routes
+- Added login/register functionality
+- Created AuthContext for state management
 
 v2.0.1
-- Added .gitignore file
-- Updated documentation
-- Improved code organization
+- Previous updates...
 
 ## Future Enhancements
+- OAuth integration
+- Password recovery
+- Email verification
+- User profiles
 - Cloud synchronization
-- Optional user accounts
-- Dark mode support
-- Task categories
-- Mobile responsiveness improvements
