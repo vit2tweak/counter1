@@ -1,38 +1,45 @@
 # Counter1
 
 ## What's New in v3.0.0
-- Added authentication system with JWT
-- Integrated Axios for API communication
-- Added protected routes
-- Improved error handling
+- Added user authentication system
+- Implemented protected routes
+- Added login page
+- Updated dependencies to latest versions
 
-## Breaking Changes
-- Requires backend API endpoint configuration
-- Authentication required for certain features
+## Features
+- User authentication with login/logout
+- Protected routes for authenticated users
+- Counter with customizable step amount
+- Todo list with persistent storage
+- Tabbed interface
 
-## Setup
+## Getting Started
 1. Clone the repository
 2. Install dependencies:
    ```bash
    npm install
    ```
-3. Create .env file in project root:
-   ```
-   REACT_APP_API_URL=your_api_endpoint
-   ```
-4. Start development server:
+3. Start the development server:
    ```bash
    npm start
    ```
 
-## Environment Variables
-- REACT_APP_API_URL: Backend API endpoint (required)
+## Default Login Credentials
+Username: demo
+Password: demo
 
-## Migration Guide
-If upgrading from v2.x:
-1. Add new environment variables
-2. Update existing components to use authentication
-3. Install new dependencies
+## Technical Stack
+- React 18.2.0
+- React Router DOM 6.x
+- Material-UI 5.x
+- JWT authentication
 
-## Documentation
-See program-note.md for detailed documentation
+## Known Issues
+- Using mock authentication (replace with real API)
+- Todo data stored in localStorage
+
+## Contributing
+Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.

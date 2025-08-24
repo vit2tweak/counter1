@@ -1,21 +1,20 @@
-const VALID_CREDENTIALS = {
-  username: 'ai-gen-user',
-  password: 'Pen555Bottle++'
-};
+export const authService = {
+  login: async (credentials) => {
+    // Mock authentication - replace with actual API call
+    if (credentials.username === 'demo' && credentials.password === 'demo') {
+      return {
+        token: 'mock-jwt-token',
+        user: { id: 1, username: credentials.username }
+      };
+    }
+    throw new Error('Invalid credentials');
+  },
 
-export const login = async (username, password) => {
-  if (username === VALID_CREDENTIALS.username && password === VALID_CREDENTIALS.password) {
-    const token = btoa(username + ':' + new Date().getTime());
-    localStorage.setItem('authToken', token);
-    return { success: true };
+  validateToken: async (token) => {
+    // Mock token validation - replace with actual API call
+    if (token === 'mock-jwt-token') {
+      return { id: 1, username: 'demo' };
+    }
+    throw new Error('Invalid token');
   }
-  return { success: false, error: 'Invalid credentials' };
-};
-
-export const logout = () => {
-  localStorage.removeItem('authToken');
-};
-
-export const isAuthenticated = () => {
-  return !!localStorage.getItem('authToken');
 };
