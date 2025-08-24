@@ -2,30 +2,29 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const login = async (credentials) => {
-  try {
-    const response = await axios.post(`${API_URL}/auth/login`, credentials);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.response?.data?.message || 'Login failed');
+class AuthService {
+  async login(username, password) {
+    try {
+      const response = await axios.post(`${API_URL}/auth/login`, {
+        username,
+        password
+      });
+      if (response.data.token) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+      }
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response?.data?.message || 'Login failed');
+    }
   }
-};
 
-export const logout = async () => {
-  try {
-    await axios.post(`${API_URL}/auth/logout`);
-  } catch (error) {
-    console.error('Logout error:', error);
+  logout() {
+    localStorage.removeItem('user');
   }
-};
 
-export const verifyToken = async (token) => {
-  try {
-    const response = await axios.get(`${API_URL}/auth/verify`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error('Invalid token');
+  getCurrentUser() {
+    return JSON.parse(localStorage.getItem('user'));
   }
-};
+}
+
+export default new AuthService();
