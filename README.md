@@ -1,32 +1,30 @@
 # Counter1
 
 ## What's New in v3.0.0
-- Added authentication system
-- Protected routes implementation
-- Login functionality
-- Session management
+- Added user authentication system
+- Integrated cloud synchronization
+- Added Axios for API communication
+- Updated all dependencies to latest versions
 
-## Setup
+## Getting Started
 1. Clone the repository
-2. Create .env file with required variables:
+2. Install dependencies:
+   ```bash
+   npm install
    ```
-   REACT_APP_API_URL=http://localhost:3001
-   REACT_APP_JWT_SECRET=your-secret-key
+3. Create a .env file in the root directory with:
    ```
-3. Install dependencies: `npm install`
-4. Start the development server: `npm start`
-
-## Authentication
-The application now requires users to log in before accessing the counter and todo features. Authentication is handled using JWT tokens and protected routes.
+   REACT_APP_API_URL=your_api_url
+   ```
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
 ## Migration Notes
-- Existing users will need to create accounts
-- Local storage data structure has been updated
-- API backend is required for authentication
+- Version 3.0.0 requires a backend API for authentication
+- Users need to create an account to use cloud features
+- Local storage is still used as fallback for offline mode
 
-## Known Issues
-- Requires backend service for authentication
-- Session expires after 24 hours
-
-## License
-MIT
+## Documentation
+See program-note.md for detailed documentation
