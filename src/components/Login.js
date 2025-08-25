@@ -1,43 +1,63 @@
-import React, { useState } from 'react';
-import { Box, TextField, Button, Typography } from '@mui/material';
-import { useAuth } from '../context/AuthContext';
+import React from 'react';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { TextField, Button, Box, Paper } from '@mui/material';
+import { useLoginStyles } from './FormStyles';
 
-const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const { login } = useAuth();
+const validationSchema = Yup.object({
+  username: Yup.string().required('Required'),
+  password: Yup.string().required('Required')
+});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Mock login - in real app, would call API
-    if (username && password) {
-      login('mock-jwt-token');
-    }
-  };
+const Login = ({ onLogin }) => {
+  const classes = useLoginStyles();
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      sx={{ mt: 4, display: 'flex', flexDirection: 'column', gap: 2 }}
-    >
-      <Typography variant="h5">Login</Typography>
-      <TextField
-        label="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-      <TextField
-        label="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <Button type="submit" variant="contained">
-        Login
-      </Button>
+    <Box className={classes.container}>
+      <Paper className={classes.formContainer}>
+        <Formik
+          initialValues={{ username: '', password: '' }}
+          validationSchema={validationSchema}
+          onSubmit={onLogin}
+        >
+          {({ errors, touched, handleChange }) => (
+            <Form className={classes.form}>
+              <TextField
+                name="username"
+                label="Username"
+                variant="outlined"
+                onChange={handleChange}
+                error={touched.username && Boolean(errors.username)}
+                helperText={touched.username && errors.username}
+                size="small"
+                fullWidth
+                margin="dense"
+              />
+              <TextField
+                name="password"
+                type="password"
+                label="Password"
+                variant="outlined"
+                onChange={handleChange}
+                error={touched.password && Boolean(errors.password)}
+                helperText={touched.password && errors.password}
+                size="small"
+                fullWidth
+                margin="dense"
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                className={classes.submitButton}
+              >
+                Login
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </Paper>
     </Box>
   );
 };
