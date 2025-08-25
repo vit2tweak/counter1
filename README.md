@@ -1,30 +1,27 @@
 # Counter1
 
 ## What's New in v2.2.0
-- Added useAuth custom hook for better authentication management
-- Fixed authentication context issues
-- Improved error handling
-- Updated documentation
+- Fixed authentication context with proper useAuth hook
+- Improved error handling and validation
+- Enhanced documentation
 
 ## Breaking Changes
-- Authentication context now requires useAuth hook
-- Login component updated to use new hook
-
-## Migration Guide
-If you're upgrading from v2.1.0:
-1. Update imports to use new useAuth hook
-2. Replace direct AuthContext usage with useAuth hook
-3. Ensure AuthProvider is properly wrapped around your app
+- Updated AuthContext to include useAuth hook
+- Login component now uses the new useAuth hook
 
 ## Getting Started
 1. Clone the repository
 2. Install dependencies: `npm install`
 3. Start development server: `npm start`
 
-## Available Scripts
-- `npm start`: Runs the app in development mode
-- `npm test`: Launches the test runner
-- `npm run build`: Builds the app for production
+## Features
+- Counter with customizable step amount
+- Todo list with persistent storage
+- Protected routes with authentication
+- Tabbed interface
 
-## Documentation
-See program-note.md for detailed documentation.
+## Contributing
+Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.

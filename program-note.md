@@ -52,7 +52,7 @@ v2.2.0
 - Added useAuth custom hook
 - Fixed authentication context issues
 - Improved error handling
-- Updated documentation
+- Enhanced documentation
 
 ## Known Limitations
 - Simplified login without backend
