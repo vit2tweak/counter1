@@ -1,40 +1,58 @@
-import React, { useState } from 'react';
-import { Box, Tabs, Tab } from '@mui/material';
+import React from 'react';
+import { Box, Tabs, Tab, AppBar, Toolbar, Typography, Button } from '@mui/material';
 import Counter from './components/Counter';
 import TodoList from './components/TodoList';
+import Login from './components/Login';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import './App.css';
 
-function TabPanel({ children, value, index }) {
-  return (
-    <div hidden={value !== index} style={{ width: '100%' }}>
-      {value === index && children}
-    </div>
-  );
-}
+const TabPanel = ({ children, value, index }) => (
+  <div hidden={value !== index}>
+    {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+  </div>
+);
 
-function App() {
-  const [tabValue, setTabValue] = useState(0);
-
-  const handleTabChange = (event, newValue) => {
-    setTabValue(newValue);
-  };
+const MainContent = () => {
+  const [value, setValue] = React.useState(0);
+  const { logout, user } = useAuth();
 
   return (
-    <Box className="App">
-      <Box sx={{ width: '100%', maxWidth: 600, bgcolor: 'white', borderRadius: 2, boxShadow: 2 }}>
-        <Tabs value={tabValue} onChange={handleTabChange} centered>
+    <Box sx={{ width: '100%' }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Welcome, {user?.username}
+          </Typography>
+          <Button color="inherit" onClick={logout}>Logout</Button>
+        </Toolbar>
+      </AppBar>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={(e, newValue) => setValue(newValue)}>
           <Tab label="Counter" />
           <Tab label="Todo List" />
         </Tabs>
-        <TabPanel value={tabValue} index={0}>
-          <Counter />
-        </TabPanel>
-        <TabPanel value={tabValue} index={1}>
-          <TodoList />
-        </TabPanel>
       </Box>
+      <TabPanel value={value} index={0}>
+        <Counter />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <TodoList />
+      </TabPanel>
     </Box>
   );
-}
+};
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
+  );
+};
+
+const AppContent = () => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? <MainContent /> : <Login />;
+};
 
 export default App;

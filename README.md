@@ -1,42 +1,36 @@
 # Counter1
 
-## What's New in v2.0.1
-- Added .gitignore file for better version control
-- Updated project documentation
-- Improved code organization and structure
-
-## Overview
-Counter1 is a React application that combines a counter and todo list functionality in a tabbed interface.
-
-## Features
-- Counter with customizable step amount
-- Todo list with persistent storage
-- Material-UI based interface
+## What's New in v2.1.0
+- Streamlined login system with minimal UI
+- Session management using AuthContext
+- Improved navigation and user experience
+- Enhanced code organization
 
 ## Getting Started
-
-### Prerequisites
-- Node.js 14.x or higher
-- npm 6.x or higher
-
-### Installation
 1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm start
-   ```
+2. Install dependencies: `npm install`
+3. Start the development server: `npm start`
+
+## Features
+- Simple authentication system
+- Counter with customizable steps
+- Todo list with persistent storage
+- Tabbed interface
+- Session management
+
+## Technical Details
+- Built with React 18.2.0
+- Material-UI for styling
+- Local storage for data persistence
+- Context API for state management
 
 ## Usage
-- Use the tabs to switch between Counter and Todo List
-- Counter: Adjust step size and increment/decrement
-- Todo List: Add, edit, complete, and delete tasks
+1. Enter any username to access the application
+2. Navigate between Counter and Todo List using tabs
+3. Use the logout button to end your session
 
 ## Contributing
-Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
+Pull requests are welcome. For major changes, please open an issue first.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT
