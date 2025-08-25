@@ -1,105 +1,107 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  IconButton,
-  TextField,
-  Button,
-  Checkbox
-} from '@mui/material';
-import { Delete, Edit } from '@mui/icons-material';
+import { List, ListItem, TextField, Button, Checkbox, IconButton, Box } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-function TodoList() {
+/**
+ * TodoList Component
+ * Manages a list of todo items with CRUD operations
+ * 
+ * @component
+ * @returns {JSX.Element} Rendered TodoList component
+ */
+const TodoList = () => {
+  // State management for todos and new todo input
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
-  const [editId, setEditId] = useState(null);
 
+  /**
+   * Load todos from localStorage on component mount
+   */
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos');
-    if (savedTodos) setTodos(JSON.parse(savedTodos));
+    if (savedTodos) {
+      setTodos(JSON.parse(savedTodos));
+    }
   }, []);
 
+  /**
+   * Save todos to localStorage whenever they change
+   */
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const handleAdd = () => {
+  /**
+   * Adds a new todo item
+   * @param {Event} e - Form submission event
+   */
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (!newTodo.trim()) return;
-    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+
+    const newTodoItem = {
+      id: Date.now(),
+      text: newTodo.trim(),
+      completed: false
+    };
+
+    setTodos(prevTodos => [...prevTodos, newTodoItem]);
     setNewTodo('');
   };
 
-  const handleDelete = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+  /**
+   * Toggles todo completion status
+   * @param {number} id - Todo item ID
+   */
+  const toggleTodo = (id) => {
+    setTodos(prevTodos =>
+      prevTodos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
 
-  const handleToggle = (id) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
-  };
-
-  const handleEdit = (id, newText) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, text: newText } : todo
-    ));
-    setEditId(null);
+  /**
+   * Deletes a todo item
+   * @param {number} id - Todo item ID
+   */
+  const deleteTodo = (id) => {
+    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
   };
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', mb: 2 }}>
+    <Box sx={{ p: 2 }}>
+      <form onSubmit={handleSubmit}>
         <TextField
           fullWidth
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder="Add new todo"
-          size="small"
+          sx={{ mb: 2 }}
         />
-        <Button
-          variant="contained"
-          onClick={handleAdd}
-          sx={{ ml: 1 }}
-        >
-          Add
+        <Button type="submit" variant="contained">
+          Add Todo
         </Button>
-      </Box>
+      </form>
+
       <List>
         {todos.map(todo => (
           <ListItem key={todo.id}>
             <Checkbox
               checked={todo.completed}
-              onChange={() => handleToggle(todo.id)}
+              onChange={() => toggleTodo(todo.id)}
             />
-            {editId === todo.id ? (
-              <TextField
-                fullWidth
-                defaultValue={todo.text}
-                onBlur={(e) => handleEdit(todo.id, e.target.value)}
-                autoFocus
-              />
-            ) : (
-              <ListItemText
-                primary={todo.text}
-                sx={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-              />
-            )}
-            <ListItemSecondaryAction>
-              <IconButton onClick={() => setEditId(todo.id)}>
-                <Edit />
-              </IconButton>
-              <IconButton onClick={() => handleDelete(todo.id)}>
-                <Delete />
-              </IconButton>
-            </ListItemSecondaryAction>
+            <Box sx={{ flexGrow: 1, textDecoration: todo.completed ? 'line-through' : 'none' }}>
+              {todo.text}
+            </Box>
+            <IconButton onClick={() => deleteTodo(todo.id)}>
+              <DeleteIcon />
+            </IconButton>
           </ListItem>
         ))}
       </List>
     </Box>
   );
-}
+};
 
 export default TodoList;
