@@ -1,27 +1,45 @@
 # Counter1
 
-## What's New in v2.2.0
-- Fixed authentication context with proper useAuth hook
-- Improved error handling and validation
-- Enhanced documentation
+## What's New in v3.0.0
 
-## Breaking Changes
-- Updated AuthContext to include useAuth hook
-- Login component now uses the new useAuth hook
+### User Management System Added
+- Complete CRUD operations for users
+- Role-based access control
+- Secure password handling with bcrypt
+- User list view with edit and delete functions
+- User creation form with validation
+
+### Security Enhancements
+- Password hashing implementation
+- Enhanced session management
+- Input validation improvements
+
+### Breaking Changes
+- User data structure has changed
+- New dependencies added
 
 ## Getting Started
+
 1. Clone the repository
-2. Install dependencies: `npm install`
-3. Start development server: `npm start`
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+4. Access the application at http://localhost:3000
 
-## Features
-- Counter with customizable step amount
-- Todo list with persistent storage
-- Protected routes with authentication
-- Tabbed interface
+## Migration Guide
 
-## Contributing
-Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
+If upgrading from v2.x:
+1. Clear localStorage to avoid data structure conflicts
+2. Update all dependencies
+3. Review new user management features
+
+## Documentation
+See program-note.md for detailed documentation.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT
