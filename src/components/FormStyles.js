@@ -1,24 +1,25 @@
 import { makeStyles } from '@mui/styles';
 
-export const useLoginStyles = makeStyles((theme) => ({
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-    padding: theme.spacing(2)
-  },
-  formContainer: {
-    padding: theme.spacing(3),
-    maxWidth: '400px',
-    width: '100%'
-  },
+const useStyles = makeStyles((theme) => ({
   form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: theme.spacing(2)
+    gap: '1rem',
+    maxWidth: '400px',
+    margin: '0 auto',
+    padding: '2rem'
   },
-  submitButton: {
-    marginTop: theme.spacing(2)
+  field: {
+    marginBottom: '1rem'
+  },
+  error: {
+    color: theme.palette.error.main,
+    fontSize: '0.875rem',
+    marginTop: '0.25rem'
+  },
+  button: {
+    marginTop: '1rem'
   }
 }));
+
+export default useStyles;

@@ -1,35 +1,34 @@
 # Counter1
 
-## What's New in v2.1.1
-- Fixed missing Material-UI icons dependency
-- Updated TodoList component with proper icon imports
-- Improved documentation
+## What's New in v2.2.0
+- Enhanced form validation with Formik and Yup
+- Improved Material-UI styling
+- Better error handling and user feedback
+- Updated dependencies to latest versions
 
 ## Getting Started
-
-### Prerequisites
-- Node.js 14.x or higher
-- npm 6.x or higher
-
-### Installation
-1. Clone the repository
-2. Install dependencies:
+1. Install dependencies:
 ```bash
 npm install
 ```
-3. Start the development server:
+
+2. Start the development server:
 ```bash
 npm start
 ```
 
-## Features
-- Counter with customizable step amount
-- Todo list with persistent storage
-- Simple authentication system
-- Material-UI components
+## Dependencies Added
+- @mui/styles: Material-UI styling solution
+- formik: Form management
+- yup: Form validation
 
-## Contributing
-Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
+## Migration Notes
+- Updated Material-UI imports to v5 syntax
+- Added form validation schemas
+- Enhanced styling with makeStyles
+
+## Known Issues
+- None
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT
