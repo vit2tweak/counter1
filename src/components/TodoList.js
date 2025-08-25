@@ -10,77 +10,57 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function TodoList() {
+const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
 
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos');
-    if (savedTodos) {
-      setTodos(JSON.parse(savedTodos));
-    }
+    if (savedTodos) setTodos(JSON.parse(savedTodos));
   }, []);
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const handleAddTodo = () => {
+  const handleAdd = () => {
     if (newTodo.trim()) {
       setTodos([...todos, { text: newTodo, completed: false }]);
       setNewTodo('');
     }
   };
 
-  const handleDeleteTodo = (index) => {
-    const newTodos = todos.filter((_, i) => i !== index);
-    setTodos(newTodos);
-  };
-
-  const handleToggleTodo = (index) => {
-    const newTodos = todos.map((todo, i) => 
-      i === index ? { ...todo, completed: !todo.completed } : todo
-    );
-    setTodos(newTodos);
+  const handleDelete = (index) => {
+    setTodos(todos.filter((_, i) => i !== index));
   };
 
   return (
-    <Box sx={{ maxWidth: 600, margin: 'auto', p: 2 }}>
+    <Box sx={{ maxWidth: 600, mx: 'auto', mt: 2 }}>
       <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
         <TextField
           fullWidth
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder="Add new todo"
-          onKeyPress={(e) => e.key === 'Enter' && handleAddTodo()}
         />
-        <Button variant="contained" onClick={handleAddTodo}>
-          Add
-        </Button>
+        <Button variant="contained" onClick={handleAdd}>Add</Button>
       </Box>
       <List>
         {todos.map((todo, index) => (
           <ListItem
             key={index}
             secondaryAction={
-              <IconButton edge="end" onClick={() => handleDeleteTodo(index)}>
+              <IconButton edge="end" onClick={() => handleDelete(index)}>
                 <DeleteIcon />
               </IconButton>
             }
           >
-            <ListItemText
-              primary={todo.text}
-              onClick={() => handleToggleTodo(index)}
-              sx={{
-                textDecoration: todo.completed ? 'line-through' : 'none',
-                cursor: 'pointer'
-              }}
-            />
+            <ListItemText primary={todo.text} />
           </ListItem>
         ))}
       </List>
     </Box>
   );
-}
+};
 
 export default TodoList;

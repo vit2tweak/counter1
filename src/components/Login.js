@@ -1,79 +1,57 @@
-import React from 'react';
-import { TextField, Button, Paper, Typography } from '@mui/material';
-import { useAuth } from '../contexts/AuthContext';
-import useStyles from './FormStyles';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-
-const validationSchema = Yup.object({
-  username: Yup.string()
-    .required('Username is required')
-    .min(3, 'Username must be at least 3 characters'),
-  password: Yup.string()
-    .required('Password is required')
-    .min(6, 'Password must be at least 6 characters')
-});
+import { TextField, Button, Box, Typography } from '@mui/material';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
-  const classes = useStyles();
-  const { login } = useAuth();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    login(values.username);
-    setSubmitting(false);
-    navigate('/');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (username === 'admin' && password === 'password') {
+      login({ username });
+      navigate('/');
+    } else {
+      setError('Invalid credentials');
+    }
   };
 
   return (
-    <Paper elevation={3} className={classes.form}>
-      <Typography variant="h5" gutterBottom>
-        Login
-      </Typography>
-      <Formik
-        initialValues={{ username: '', password: '' }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ values, errors, touched, handleChange, handleBlur, isSubmitting }) => (
-          <Form>
-            <TextField
-              fullWidth
-              name="username"
-              label="Username"
-              value={values.username}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.username && Boolean(errors.username)}
-              helperText={touched.username && errors.username}
-              className={classes.field}
-            />
-            <TextField
-              fullWidth
-              name="password"
-              type="password"
-              label="Password"
-              value={values.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={touched.password && Boolean(errors.password)}
-              helperText={touched.password && errors.password}
-              className={classes.field}
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disabled={isSubmitting}
-              className={classes.button}
-            >
-              Login
-            </Button>
-          </Form>
+    <Box sx={{ maxWidth: 400, mx: 'auto', mt: 4, p: 2 }}>
+      <Typography variant="h4" gutterBottom>Login</Typography>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          fullWidth
+          label="Username"
+          margin="normal"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          type="password"
+          label="Password"
+          margin="normal"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {error && (
+          <Typography color="error" sx={{ mt: 2 }}>{error}</Typography>
         )}
-      </Formik>
-    </Paper>
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          sx={{ mt: 2 }}
+        >
+          Login
+        </Button>
+      </form>
+    </Box>
   );
 };
 
