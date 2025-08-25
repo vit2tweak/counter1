@@ -1,33 +1,32 @@
 # Counter1
 
-## What's New in v2.1.0
-- Redesigned login interface with compact form layout
-- Enhanced form validation using Formik and Yup
-- Improved responsive design for better mobile experience
-- Updated Material-UI components for modern look
+## What's New in v2.1.1
+- Fixed missing Material-UI icons dependency
+- Updated TodoList component with proper icon imports
+- Improved documentation
 
 ## Getting Started
-1. Install dependencies:
+
+### Prerequisites
+- Node.js 14.x or higher
+- npm 6.x or higher
+
+### Installation
+1. Clone the repository
+2. Install dependencies:
 ```bash
 npm install
 ```
-
-2. Start development server:
+3. Start the development server:
 ```bash
 npm start
 ```
 
-## Migration Notes
-- Added new dependencies: formik, yup
-- Updated Material-UI components
-- No breaking changes to existing functionality
-
 ## Features
-- Compact login form
-- Form validation
-- Counter functionality
-- Todo list management
-- Local storage persistence
+- Counter with customizable step amount
+- Todo list with persistent storage
+- Simple authentication system
+- Material-UI components
 
 ## Contributing
 Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.

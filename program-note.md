@@ -1,24 +1,29 @@
 # Counter1 Project Documentation
 
 ## Project Overview
-Counter1 is a React-based application combining counter functionality with a todo list manager, featuring a streamlined login interface and improved UI/UX.
+Counter1 is a React-based application combining counter functionality with a todo list manager, featuring a streamlined login system, tabbed interface, and local storage persistence.
 
 ## Current Features
-- Redesigned login page with compact form layout
-- Responsive form design with Material-UI components
-- Form validation and error handling
-- Tabbed interface with two main sections:
-  - Counter Tab
-  - Todo List Tab
-- Local storage persistence
+- Simplified login system
+  - Basic authentication flow
+  - Minimalist UI
+  - Session management
+- Tabbed interface with two main sections
+- Counter Tab:
+  - Increment/decrement counter
+  - Customizable step amount
+  - Input validation
+- Todo Tab:
+  - CRUD operations for tasks
+  - Mark tasks as complete
+  - Persistent storage using localStorage
 
 ## Technical Stack
 - React 18.2.0
 - React Router DOM 6.x
-- Material-UI 5.x
-- Formik 2.x (new)
-- Yup validation (new)
+- Material-UI 5.x (@mui/material and @mui/icons-material)
 - LocalStorage for data persistence
+- JWT for basic session management
 
 ## Project Structure
 ```
@@ -26,9 +31,10 @@ Counter1 is a React-based application combining counter functionality with a tod
 │   ├── components/
 │   │   ├── Counter.js
 │   │   ├── TodoList.js
-│   │   ├── TabPanel.js
 │   │   ├── Login.js
-│   │   └── FormStyles.js
+│   │   └── TabPanel.js
+│   ├── contexts/
+│   │   └── AuthContext.js
 │   ├── App.js
 │   ├── App.css
 │   └── index.js
@@ -37,7 +43,7 @@ Counter1 is a React-based application combining counter functionality with a tod
 ## Configuration Details
 - No environment variables required
 - Local development server runs on port 3000
-- Form validation rules configurable in FormStyles.js
+- JWT secret managed internally
 
 ## Setup Instructions
 1. Clone repository
@@ -45,20 +51,26 @@ Counter1 is a React-based application combining counter functionality with a tod
 3. Run `npm start`
 
 ## Known Limitations
-- Local storage only
-- No backend authentication
-- No cloud sync
+- Simplified login without backend
+- Todo data stored locally
+- Basic session management
+- No password recovery
 
 ## Recent Changes
+v2.1.1
+- Added missing @mui/icons-material dependency
+- Fixed TodoList component Delete icon import
+- Updated package.json dependencies
+
 v2.1.0
-- Redesigned login form with compact layout
-- Added Formik for form management
-- Improved form validation
-- Enhanced responsive design
+- Simplified login system
+- Added AuthContext for session management
+- Streamlined UI components
 
 ## Future Enhancements
-- OAuth integration
-- Password recovery
-- Remember me functionality
-- Dark mode support
+- Enhanced authentication
 - Cloud synchronization
+- User accounts with profiles
+- Dark mode support
+- Task categories
+- Mobile responsiveness improvements

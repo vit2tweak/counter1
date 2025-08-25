@@ -1,75 +1,79 @@
 import React, { useState, useEffect } from 'react';
-import { Box, List, ListItem, ListItemText, TextField, Button, Checkbox, IconButton } from '@mui/material';
+import {
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  TextField,
+  Button,
+  Box
+} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 function TodoList() {
-  const [todos, setTodos] = useState(() => {
-    const saved = localStorage.getItem('todos');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
+
+  useEffect(() => {
+    const savedTodos = localStorage.getItem('todos');
+    if (savedTodos) {
+      setTodos(JSON.parse(savedTodos));
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (e) => {
-    e.preventDefault();
-    if (!newTodo.trim()) return;
-    
-    setTodos([...todos, { text: newTodo, completed: false }]);
-    setNewTodo('');
+  const handleAddTodo = () => {
+    if (newTodo.trim()) {
+      setTodos([...todos, { text: newTodo, completed: false }]);
+      setNewTodo('');
+    }
   };
 
-  const toggleTodo = (index) => {
-    const newTodos = [...todos];
-    newTodos[index].completed = !newTodos[index].completed;
+  const handleDeleteTodo = (index) => {
+    const newTodos = todos.filter((_, i) => i !== index);
     setTodos(newTodos);
   };
 
-  const deleteTodo = (index) => {
-    setTodos(todos.filter((_, i) => i !== index));
+  const handleToggleTodo = (index) => {
+    const newTodos = todos.map((todo, i) => 
+      i === index ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(newTodos);
   };
 
   return (
-    <Box>
-      <form onSubmit={addTodo} style={{ marginBottom: '20px' }}>
+    <Box sx={{ maxWidth: 600, margin: 'auto', p: 2 }}>
+      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
         <TextField
           fullWidth
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder="Add new todo"
-          variant="outlined"
-          size="small"
+          onKeyPress={(e) => e.key === 'Enter' && handleAddTodo()}
         />
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{ mt: 1 }}
-          fullWidth
-        >
-          Add Todo
+        <Button variant="contained" onClick={handleAddTodo}>
+          Add
         </Button>
-      </form>
-
+      </Box>
       <List>
         {todos.map((todo, index) => (
           <ListItem
             key={index}
             secondaryAction={
-              <IconButton edge="end" onClick={() => deleteTodo(index)}>
+              <IconButton edge="end" onClick={() => handleDeleteTodo(index)}>
                 <DeleteIcon />
               </IconButton>
             }
           >
-            <Checkbox
-              checked={todo.completed}
-              onChange={() => toggleTodo(index)}
-            />
             <ListItemText
               primary={todo.text}
+              onClick={() => handleToggleTodo(index)}
               sx={{
-                textDecoration: todo.completed ? 'line-through' : 'none'
+                textDecoration: todo.completed ? 'line-through' : 'none',
+                cursor: 'pointer'
               }}
             />
           </ListItem>
