@@ -1,13 +1,9 @@
 # Counter1 Project Documentation
 
 ## Project Overview
-Counter1 is a React-based application that combines counter functionality with a todo list manager and user authentication. The application features a tabbed interface, local storage persistence, and secure login capabilities.
+Counter1 is a React-based application that combines counter functionality with a todo list manager, featuring a tabbed interface, local storage persistence, and user authentication.
 
 ## Current Features
-- User Authentication
-  - Login/Logout functionality
-  - Protected routes
-  - Session management
 - Tabbed interface with two main sections
 - Counter Tab:
   - Increment/decrement counter
@@ -17,13 +13,17 @@ Counter1 is a React-based application that combines counter functionality with a
   - CRUD operations for tasks
   - Mark tasks as complete
   - Persistent storage using localStorage
+- Authentication:
+  - User login/logout functionality
+  - Session management
+  - Protected routes
 
 ## Technical Stack
 - React 18.2.0
 - React Router DOM 6.x
 - Material-UI 5.x
-- JWT for authentication
 - LocalStorage for data persistence
+- JWT for authentication
 
 ## Project Structure
 ```
@@ -33,43 +33,36 @@ Counter1 is a React-based application that combines counter functionality with a
 │   │   ├── TodoList.js
 │   │   ├── TabPanel.js
 │   │   ├── Login.js
-│   │   └── ProtectedRoute.js
-│   ├── contexts/
+│   │   └── Navbar.js
+│   ├── context/
 │   │   └── AuthContext.js
-│   ├── services/
-│   │   └── auth.js
 │   ├── App.js
 │   ├── App.css
 │   └── index.js
 ```
 
-## Authentication
-- JWT-based authentication
-- Protected routes for authenticated users
-- Session persistence using localStorage
-
 ## Configuration Details
-- Default port: 3000
-- Environment variables:
-  - REACT_APP_API_URL: API endpoint for authentication
+- No environment variables required
+- Local development server runs on port 3000
+- JWT token stored in localStorage
 
 ## Setup Instructions
 1. Clone repository
 2. Run `npm install`
-3. Create .env file with required variables
-4. Run `npm start`
+3. Run `npm start`
 
 ## Known Limitations
-- Todo data stored locally
+- Todo data is stored locally
 - Basic authentication implementation
-- No password recovery
+- No cloud synchronization
 
 ## Recent Changes
-v3.0.0
-- Added authentication system
-- Implemented protected routes
-- Added login page
-- Updated dependencies
+v2.1.0
+- Added user authentication
+- Implemented logout functionality
+- Added protected routes
+- Added navigation bar
+- Updated documentation
 
 v2.0.1
 - Added .gitignore file
@@ -77,9 +70,9 @@ v2.0.1
 - Improved code organization
 
 ## Future Enhancements
-- Enhanced security features
-- Social login integration
-- User profile management
-- Password recovery
 - Cloud synchronization
+- Enhanced user accounts
 - Dark mode support
+- Task categories
+- Mobile responsiveness improvements
+- OAuth integration

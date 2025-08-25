@@ -1,45 +1,41 @@
 # Counter1
 
-## What's New in v3.0.0
-- Added user authentication system
-- Implemented protected routes
-- Added login page
-- Updated dependencies to latest versions
+## What's New in v2.1.0
+- Added user authentication
+- Implemented logout functionality
+- Added protected routes
+- Added navigation bar
 
 ## Features
-- User authentication with login/logout
-- Protected routes for authenticated users
 - Counter with customizable step amount
 - Todo list with persistent storage
-- Tabbed interface
+- User authentication
+- Protected routes
+- Responsive design
 
 ## Getting Started
 1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm start
-   ```
+2. Install dependencies: `npm install`
+3. Start the development server: `npm start`
 
-## Default Login Credentials
-Username: demo
-Password: demo
+## Authentication
+The application now includes basic authentication:
+- Login required to access features
+- Persistent session using localStorage
+- Logout functionality in navigation bar
 
-## Technical Stack
+## Technical Details
 - React 18.2.0
-- React Router DOM 6.x
 - Material-UI 5.x
 - JWT authentication
+- LocalStorage for data persistence
 
 ## Known Issues
-- Using mock authentication (replace with real API)
-- Todo data stored in localStorage
+- Uses mock authentication (replace with real backend)
+- Todo data is stored locally
 
-## Contributing
-Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
-
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Future Updates
+- Real backend integration
+- OAuth support
+- Enhanced security features
+- Cloud synchronization
