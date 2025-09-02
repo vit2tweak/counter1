@@ -4,28 +4,23 @@ export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
-  const login = (userData) => {
+  const login = (userData, authToken) => {
     setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
+    setToken(authToken);
+    localStorage.setItem('userSession', JSON.stringify({ user: userData, token: authToken }));
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    setToken(null);
+    localStorage.removeItem('userSession');
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
 };

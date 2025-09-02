@@ -3,6 +3,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemSecondaryAction,
   IconButton,
   TextField,
   Button,
@@ -16,46 +17,49 @@ const TodoList = () => {
 
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos');
-    if (savedTodos) setTodos(JSON.parse(savedTodos));
+    if (savedTodos) {
+      setTodos(JSON.parse(savedTodos));
+    }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const handleAdd = () => {
-    if (newTodo.trim()) {
-      setTodos([...todos, { text: newTodo, completed: false }]);
-      setNewTodo('');
-    }
+  const addTodo = (e) => {
+    e.preventDefault();
+    if (!newTodo.trim()) return;
+    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+    setNewTodo('');
   };
 
-  const handleDelete = (index) => {
-    setTodos(todos.filter((_, i) => i !== index));
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
   };
 
   return (
-    <Box sx={{ maxWidth: 600, mx: 'auto', mt: 2 }}>
-      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+    <Box sx={{ mt: 2 }}>
+      <form onSubmit={addTodo}>
         <TextField
           fullWidth
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder="Add new todo"
+          margin="normal"
         />
-        <Button variant="contained" onClick={handleAdd}>Add</Button>
-      </Box>
+        <Button type="submit" variant="contained" color="primary" fullWidth>
+          Add Todo
+        </Button>
+      </form>
       <List>
-        {todos.map((todo, index) => (
-          <ListItem
-            key={index}
-            secondaryAction={
-              <IconButton edge="end" onClick={() => handleDelete(index)}>
+        {todos.map((todo) => (
+          <ListItem key={todo.id}>
+            <ListItemText primary={todo.text} />
+            <ListItemSecondaryAction>
+              <IconButton edge="end" onClick={() => deleteTodo(todo.id)}>
                 <DeleteIcon />
               </IconButton>
-            }
-          >
-            <ListItemText primary={todo.text} />
+            </ListItemSecondaryAction>
           </ListItem>
         ))}
       </List>
