@@ -2,29 +2,33 @@
 
 ## What's New in v2.3.0
 - Fixed Material-UI icons dependency issue
-- Updated TodoList component with proper icon imports
-- Enhanced documentation
+- Updated Material-UI packages to latest stable versions
+- Enhanced error handling and validation
+- Improved documentation
 
 ## Getting Started
-1. Install dependencies:
+
+### Prerequisites
+- Node.js 14.x or higher
+- npm 6.x or higher
+
+### Installation
+1. Clone the repository
+2. Install dependencies:
 ```bash
 npm install
 ```
-
-2. Start the development server:
+3. Start the development server:
 ```bash
 npm start
 ```
+4. Open http://localhost:3000 in your browser
 
-3. Open http://localhost:3000 in your browser
-
-## Dependencies
-- React 18.2.0
-- Material-UI 5.x
-- Material Icons 5.x
-
-## Known Issues
-None currently
+## Features
+- Counter with customizable step amount
+- Todo list with persistent storage
+- Simple authentication system
+- Material-UI components
 
 ## Contributing
 Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.

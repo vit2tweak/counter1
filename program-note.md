@@ -23,7 +23,8 @@ Counter1 is a React-based application combining counter functionality with a tod
 - React 18.2.0
 - React Router DOM 6.x
 - Material-UI 5.x
-- @mui/icons-material 5.x (Added)
+- @mui/material: ^5.14.14
+- @mui/icons-material: ^5.14.14
 - LocalStorage for data persistence
 - JWT for session management
 - ESLint for code quality
@@ -39,21 +40,19 @@ Counter1 is a React-based application combining counter functionality with a tod
 │   │   └── TabPanel.js
 │   ├── contexts/
 │   │   └── AuthContext.js
+│   ├── utils/
+│   │   └── validation.js
 │   ├── App.js
 │   ├── App.css
 │   └── index.js
 ```
 
-## Recent Changes
-v2.3.0
-- Added @mui/icons-material dependency
-- Fixed TodoList.js dependency issues
-- Updated documentation
-
-## Known Limitations
-- Simplified login without backend
-- Local storage only persistence
-- Basic session management
+## Configuration Details
+- Development server: Port 3000
+- JWT secret: Managed internally
+- LocalStorage keys:
+  - 'todos': Todo items
+  - 'userSession': Authentication data
 
 ## Setup Instructions
 1. Clone repository
@@ -61,9 +60,29 @@ v2.3.0
 3. Run `npm start`
 4. Access application at http://localhost:3000
 
+## Known Limitations
+- Simplified login without backend
+- Local storage only persistence
+- Basic session management
+- No password recovery
+
+## Recent Changes
+v2.3.0
+- Added @mui/icons-material dependency
+- Fixed TodoList component dependencies
+- Updated Material-UI packages
+- Enhanced error handling
+
+v2.2.0
+- Added comprehensive code comments
+- Improved error handling
+- Enhanced input validation
+- Updated documentation
+
 ## Future Enhancements
 - Enhanced authentication
 - Cloud synchronization
 - User profiles
 - Dark mode support
 - Task categories
+- Mobile responsiveness improvements
