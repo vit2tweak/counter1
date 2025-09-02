@@ -1,45 +1,37 @@
 # Counter1
 
-## What's New in v3.0.0
-
-### User Management System Added
-- Complete CRUD operations for users
-- Role-based access control
-- Secure password handling with bcrypt
-- User list view with edit and delete functions
-- User creation form with validation
-
-### Security Enhancements
-- Password hashing implementation
-- Enhanced session management
-- Input validation improvements
-
-### Breaking Changes
-- User data structure has changed
-- New dependencies added
+## What's New in v2.3.0
+- Fixed Material-UI icons dependency issue
+- Updated Material-UI packages to latest stable version
+- Enhanced error handling for missing dependencies
+- Improved TodoList component implementation
 
 ## Getting Started
+1. Install dependencies:
+```bash
+npm install
+```
 
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm start
-   ```
-4. Access the application at http://localhost:3000
+2. Start the development server:
+```bash
+npm start
+```
 
-## Migration Guide
+3. Open http://localhost:3000 in your browser
 
-If upgrading from v2.x:
-1. Clear localStorage to avoid data structure conflicts
-2. Update all dependencies
-3. Review new user management features
+## Dependencies
+This project uses the following key dependencies:
+- React 18.2.0
+- Material-UI 5.14.15
+- React Router DOM 6.x
 
-## Documentation
-See program-note.md for detailed documentation.
+## Important Notes
+- Make sure all Material-UI dependencies are properly installed
+- Check package.json for the complete list of dependencies
+- The application requires a modern browser with localStorage support
 
-## License
-MIT
+## Troubleshooting
+If you encounter the error "Can't resolve '@mui/icons-material/Delete'", run:
+```bash
+npm install @mui/icons-material
+```

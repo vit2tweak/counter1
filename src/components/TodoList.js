@@ -26,37 +26,60 @@ const TodoList = () => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (e) => {
-    e.preventDefault();
-    if (!newTodo.trim()) return;
-    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
-    setNewTodo('');
+  const handleAddTodo = () => {
+    if (newTodo.trim()) {
+      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+      setNewTodo('');
+    }
   };
 
-  const deleteTodo = (id) => {
+  const handleDeleteTodo = (id) => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
+  const handleToggleTodo = (id) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
+  };
+
   return (
-    <Box sx={{ mt: 2 }}>
-      <form onSubmit={addTodo}>
+    <Box sx={{ maxWidth: 600, margin: 'auto', p: 2 }}>
+      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
         <TextField
           fullWidth
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder="Add new todo"
-          margin="normal"
+          variant="outlined"
         />
-        <Button type="submit" variant="contained" color="primary" fullWidth>
-          Add Todo
+        <Button
+          variant="contained"
+          onClick={handleAddTodo}
+          disabled={!newTodo.trim()}
+        >
+          Add
         </Button>
-      </form>
+      </Box>
       <List>
-        {todos.map((todo) => (
-          <ListItem key={todo.id}>
+        {todos.map(todo => (
+          <ListItem
+            key={todo.id}
+            onClick={() => handleToggleTodo(todo.id)}
+            sx={{
+              textDecoration: todo.completed ? 'line-through' : 'none',
+              cursor: 'pointer'
+            }}
+          >
             <ListItemText primary={todo.text} />
             <ListItemSecondaryAction>
-              <IconButton edge="end" onClick={() => deleteTodo(todo.id)}>
+              <IconButton
+                edge="end"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteTodo(todo.id);
+                }}
+              >
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
