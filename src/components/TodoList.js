@@ -3,7 +3,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemSecondaryAction,
   IconButton,
   TextField,
   Button,
@@ -28,19 +27,21 @@ const TodoList = () => {
 
   const handleAddTodo = () => {
     if (newTodo.trim()) {
-      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+      setTodos([...todos, { text: newTodo, completed: false }]);
       setNewTodo('');
     }
   };
 
-  const handleDeleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+  const handleDeleteTodo = (index) => {
+    const newTodos = todos.filter((_, i) => i !== index);
+    setTodos(newTodos);
   };
 
-  const handleToggleTodo = (id) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
+  const handleToggleComplete = (index) => {
+    const newTodos = todos.map((todo, i) => 
+      i === index ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(newTodos);
   };
 
   return (
@@ -62,27 +63,27 @@ const TodoList = () => {
         </Button>
       </Box>
       <List>
-        {todos.map(todo => (
+        {todos.map((todo, index) => (
           <ListItem
-            key={todo.id}
-            onClick={() => handleToggleTodo(todo.id)}
-            sx={{
-              textDecoration: todo.completed ? 'line-through' : 'none',
-              cursor: 'pointer'
-            }}
-          >
-            <ListItemText primary={todo.text} />
-            <ListItemSecondaryAction>
+            key={index}
+            secondaryAction={
               <IconButton
                 edge="end"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteTodo(todo.id);
-                }}
+                aria-label="delete"
+                onClick={() => handleDeleteTodo(index)}
               >
                 <DeleteIcon />
               </IconButton>
-            </ListItemSecondaryAction>
+            }
+          >
+            <ListItemText
+              primary={todo.text}
+              onClick={() => handleToggleComplete(index)}
+              sx={{
+                textDecoration: todo.completed ? 'line-through' : 'none',
+                cursor: 'pointer'
+              }}
+            />
           </ListItem>
         ))}
       </List>

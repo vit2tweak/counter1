@@ -3,35 +3,40 @@
 ## What's New in v2.3.0
 - Fixed Material-UI icons dependency issue
 - Updated Material-UI packages to latest stable version
-- Enhanced error handling for missing dependencies
-- Improved TodoList component implementation
+- Enhanced error handling for icon imports
+- Improved documentation
 
 ## Getting Started
-1. Install dependencies:
+
+### Prerequisites
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+
+### Installation
+1. Clone the repository
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-2. Start the development server:
+### Running the Application
 ```bash
 npm start
 ```
 
-3. Open http://localhost:3000 in your browser
+## Features
+- Counter with customizable step amount
+- Todo list with persistent storage
+- Basic authentication system
+- Material-UI components
 
 ## Dependencies
-This project uses the following key dependencies:
 - React 18.2.0
 - Material-UI 5.14.15
 - React Router DOM 6.x
 
-## Important Notes
-- Make sure all Material-UI dependencies are properly installed
-- Check package.json for the complete list of dependencies
-- The application requires a modern browser with localStorage support
+## Contributing
+Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
 
-## Troubleshooting
-If you encounter the error "Can't resolve '@mui/icons-material/Delete'", run:
-```bash
-npm install @mui/icons-material
-```
+## License
+This project is licensed under the MIT License - see the LICENSE file for details

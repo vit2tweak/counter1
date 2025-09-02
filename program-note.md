@@ -71,7 +71,7 @@ v2.3.0
 - Added @mui/icons-material dependency
 - Fixed TodoList component dependencies
 - Updated Material-UI packages to latest stable version
-- Enhanced error handling for missing dependencies
+- Enhanced error handling for icon imports
 
 v2.2.0
 - Added comprehensive code comments
