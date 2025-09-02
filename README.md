@@ -2,15 +2,15 @@
 
 ## What's New in v2.3.0
 - Fixed Material-UI icons dependency issue
-- Updated Material-UI packages to latest stable version
-- Enhanced error handling for icon imports
+- Updated Material-UI packages to latest versions
+- Enhanced error handling and validation
 - Improved documentation
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+- Node.js 14.x or higher
+- npm 6.x or higher
 
 ### Installation
 1. Clone the repository
@@ -18,21 +18,21 @@
 ```bash
 npm install
 ```
-
-### Running the Application
+3. Start the development server:
 ```bash
 npm start
 ```
+4. Open http://localhost:3000 in your browser
 
 ## Features
 - Counter with customizable step amount
 - Todo list with persistent storage
-- Basic authentication system
+- Simple authentication system
 - Material-UI components
 
 ## Dependencies
 - React 18.2.0
-- Material-UI 5.14.15
+- Material-UI 5.15.0
 - React Router DOM 6.x
 
 ## Contributing

@@ -37,7 +37,7 @@ const TodoList = () => {
     setTodos(newTodos);
   };
 
-  const handleToggleComplete = (index) => {
+  const handleToggleTodo = (index) => {
     const newTodos = todos.map((todo, i) => 
       i === index ? { ...todo, completed: !todo.completed } : todo
     );
@@ -78,7 +78,7 @@ const TodoList = () => {
           >
             <ListItemText
               primary={todo.text}
-              onClick={() => handleToggleComplete(index)}
+              onClick={() => handleToggleTodo(index)}
               sx={{
                 textDecoration: todo.completed ? 'line-through' : 'none',
                 cursor: 'pointer'
