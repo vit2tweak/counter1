@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  List,
-  ListItem,
-  ListItemText,
-  IconButton,
-  TextField,
-  Button,
-  Box
-} from '@mui/material';
+import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, TextField, Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const TodoList = () => {
@@ -27,32 +19,30 @@ const TodoList = () => {
 
   const handleAddTodo = () => {
     if (newTodo.trim()) {
-      setTodos([...todos, { text: newTodo, completed: false }]);
+      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
       setNewTodo('');
     }
   };
 
-  const handleDeleteTodo = (index) => {
-    const newTodos = todos.filter((_, i) => i !== index);
-    setTodos(newTodos);
+  const handleDeleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
   };
 
-  const handleToggleTodo = (index) => {
-    const newTodos = todos.map((todo, i) => 
-      i === index ? { ...todo, completed: !todo.completed } : todo
-    );
-    setTodos(newTodos);
+  const handleToggleTodo = (id) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
   };
 
   return (
-    <Box sx={{ maxWidth: 600, margin: 'auto', p: 2 }}>
-      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+    <div>
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
         <TextField
-          fullWidth
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
-          placeholder="Add new todo"
+          label="New Todo"
           variant="outlined"
+          size="small"
         />
         <Button
           variant="contained"
@@ -61,33 +51,33 @@ const TodoList = () => {
         >
           Add
         </Button>
-      </Box>
+      </div>
       <List>
-        {todos.map((todo, index) => (
+        {todos.map(todo => (
           <ListItem
-            key={index}
-            secondaryAction={
-              <IconButton
-                edge="end"
-                aria-label="delete"
-                onClick={() => handleDeleteTodo(index)}
-              >
-                <DeleteIcon />
-              </IconButton>
-            }
+            key={todo.id}
+            onClick={() => handleToggleTodo(todo.id)}
+            style={{ cursor: 'pointer' }}
           >
             <ListItemText
               primary={todo.text}
-              onClick={() => handleToggleTodo(index)}
-              sx={{
-                textDecoration: todo.completed ? 'line-through' : 'none',
-                cursor: 'pointer'
-              }}
+              style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
             />
+            <ListItemSecondaryAction>
+              <IconButton
+                edge="end"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteTodo(todo.id);
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
           </ListItem>
         ))}
       </List>
-    </Box>
+    </div>
   );
 };
 
