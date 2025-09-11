@@ -3,6 +3,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  ListItemSecondaryAction,
   IconButton,
   TextField,
   Button,
@@ -27,21 +28,19 @@ const TodoList = () => {
 
   const handleAddTodo = () => {
     if (newTodo.trim()) {
-      setTodos([...todos, { text: newTodo, completed: false }]);
+      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
       setNewTodo('');
     }
   };
 
-  const handleDeleteTodo = (index) => {
-    const newTodos = todos.filter((_, i) => i !== index);
-    setTodos(newTodos);
+  const handleDeleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
   };
 
-  const handleToggleTodo = (index) => {
-    const newTodos = todos.map((todo, i) => 
-      i === index ? { ...todo, completed: !todo.completed } : todo
-    );
-    setTodos(newTodos);
+  const handleToggleTodo = (id) => {
+    setTodos(todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    ));
   };
 
   return (
@@ -63,27 +62,27 @@ const TodoList = () => {
         </Button>
       </Box>
       <List>
-        {todos.map((todo, index) => (
+        {todos.map((todo) => (
           <ListItem
-            key={index}
-            secondaryAction={
+            key={todo.id}
+            onClick={() => handleToggleTodo(todo.id)}
+            sx={{
+              textDecoration: todo.completed ? 'line-through' : 'none',
+              cursor: 'pointer'
+            }}
+          >
+            <ListItemText primary={todo.text} />
+            <ListItemSecondaryAction>
               <IconButton
                 edge="end"
-                aria-label="delete"
-                onClick={() => handleDeleteTodo(index)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDeleteTodo(todo.id);
+                }}
               >
                 <DeleteIcon />
               </IconButton>
-            }
-          >
-            <ListItemText
-              primary={todo.text}
-              onClick={() => handleToggleTodo(index)}
-              sx={{
-                textDecoration: todo.completed ? 'line-through' : 'none',
-                cursor: 'pointer'
-              }}
-            />
+            </ListItemSecondaryAction>
           </ListItem>
         ))}
       </List>
