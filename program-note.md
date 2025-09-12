@@ -86,31 +86,11 @@ v2.1.0
 - Mobile responsiveness improvements
 
 
-## Recent Upgrade (2025-09-11)
+## Recent Upgrade (2025-09-12)
 **Version**: 1.1
-**Upgrade Description**: Uncaught Error: useAuth must be used within an AuthProvider
-    at useAuth (useAuth.js:7:1)
-    at Login (Login.js:9:1)
-    at renderWithHooks (react-dom.development.js:15486:1)
-    at mountIndeterminateComponent (react-dom.development.js:20103:1)
-    at beginWork (react-dom.development.js:21626:1)
-    at HTMLUnknownElement.callCallback (react-dom.development.js:4164:1)
-    at Object.invokeGuardedCallbackDev (react-dom.development.js:4213:1)
-    at invokeGuardedCallback (react-dom.development.js:4277:1)
-    at beginWork$1 (react-dom.development.js:27490:1)
-    at performUnitOfWork (react-dom.development.js:26596:1)
+**Upgrade Description**: add login 
 **Files Updated**: Multiple files updated with new features and improvements
 
 ## Version History
 
-- v1.1: Uncaught Error: useAuth must be used within an AuthProvider
-    at useAuth (useAuth.js:7:1)
-    at Login (Login.js:9:1)
-    at renderWithHooks (react-dom.development.js:15486:1)
-    at mountIndeterminateComponent (react-dom.development.js:20103:1)
-    at beginWork (react-dom.development.js:21626:1)
-    at HTMLUnknownElement.callCallback (react-dom.development.js:4164:1)
-    at Object.invokeGuardedCallbackDev (react-dom.development.js:4213:1)
-    at invokeGuardedCallback (react-dom.development.js:4277:1)
-    at beginWork$1 (react-dom.development.js:27490:1)
-    at performUnitOfWork (react-dom.development.js:26596:1) (2025-09-11)
+- v1.1: add login  (2025-09-12)
